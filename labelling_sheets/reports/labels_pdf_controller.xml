@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="label_pdf_report" model="ir.actions.report.xml">
+            <field name="model">labelling.sheets.print.wizard</field>
+            <field name="name">Labels PDF</field>
+            <field name="report_type">controller</field>
+            <field name="report_rml">/labelling/sheet/pdf/download</field>
+            <field name="report_name">labelling_sheets.label_pdf_report</field>
+        </record>
+    </data>
+</openerp>
