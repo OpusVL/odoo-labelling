@@ -1,6 +1,8 @@
-# DESCRIPTION FOR MODULE GOES HERE
+# Work in progress: Not ready for production use.
+# Print on Labelling Sheets
 ## Purpose
 ## Limitations
+This is not yet ready for production use.
 
 # Copyright and License
 
