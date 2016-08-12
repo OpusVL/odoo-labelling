@@ -47,12 +47,7 @@ class LabelsController(Controller):
         wizard = wizard_model.browse(cr, uid, int(wizard_id), context=context)
 
 
-        # Create an A4 portrait (210mm x 297mm) sheets with 2 columns and 8 rows of
-        # labels. Each label is 90mm x 25mm with a 2mm rounded corner. The margins are
-        # automatically calculated.
-        specs = labels.Specification(210, 297, 3, 7, 63.5, 38.1,
-                                     corner_radius=2, column_gap=3.5, row_gap=0)
-
+        specs = wizard.spec_id.get_specification()
 
         # Create a function to draw each label. This will be given the ReportLab drawing
         # object to draw on, the dimensions (NB. these will be in points, the unit

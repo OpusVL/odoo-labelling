@@ -21,19 +21,37 @@
 ##############################################################################
 
 from openerp import models, fields, api
+import labels
 
-class LabellingSheetsPrintWizard(models.TransientModel):
-    _name = 'labelling.sheets.print.wizard'
+class LabellingSheetsPaperSpec(models.Model):
+    _name = 'labelling.sheets.spec'
 
-    spec_id = fields.Many2one(
-        comodel_name='labelling.sheets.spec',
-        required=True,
-        string="Sheet Specification",
-    )
+    name = fields.Char(required=True, unique=True)
+    
+    sheet_width = fields.Float(required=True)
+    sheet_height  = fields.Float(required=True)
+    label_width = fields.Float(required=True)
+    label_height = fields.Float(required=True)
+    label_corner_radius = fields.Float(required=True)
+    column_gap = fields.Float(required=True)
+    row_gap = fields.Float(required=True)
+    num_columns = fields.Integer(required=True)
+    num_rows = fields.Integer(required=True)
 
-    @api.multi
-    def print_pdf(self):
+    def get_specification(self):
+        """Return the labels.Specification for this spec.
+        """
         self.ensure_one()
-        return self.env['report'].get_action(self, 'labelling_sheets.label_pdf_report')
+        return labels.Specification(
+            self.sheet_width,
+            self.sheet_height,
+            self.num_columns,
+            self.num_rows,
+            self.label_width,
+            self.label_height,
+            corner_radius=self.label_corner_radius,
+            column_gap=self.column_gap,
+            row_gap=self.row_gap,
+        )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

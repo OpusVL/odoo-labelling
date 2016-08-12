@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="sheet_spec_avery_A4_J8360" model="labelling.sheets.spec">
+            <field name="name">Avery A4 J8360 Address</field>
+            <field name="sheet_width">210</field>
+            <field name="sheet_height">297</field>
+            <field name="num_columns">3</field>
+            <field name="num_rows">7</field>
+            <field name="label_width">63.5</field>
+            <field name="label_height">38.1</field>
+            <field name="label_corner_radius">2</field>
+            <field name="column_gap">3.5</field>
+            <field name="row_gap">0</field>
+        </record>
+    </data>
+</openerp>

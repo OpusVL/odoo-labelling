@@ -6,6 +6,9 @@
             <field name="model">labelling.sheets.print.wizard</field>
             <field name="arch" type="xml">
                 <form>
+                    <group colspan="4">
+                        <field name="spec_id"/>
+                    </group>
                     <footer>
                         <button name="print_pdf" string="Print Labels"
                                 type="object" class="oe_highlight"/>
