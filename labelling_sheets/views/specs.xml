@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_sheet_spec" model="ir.ui.view">
+            <field name="name">labelling.sheets.spec.form</field>
+            <field name="type">form</field>
+            <field name="model">labelling.sheets.spec</field>
+            <field name="arch" type="xml">
+                <group colspan="4">
+                    <field name="name"/>
+                    <field name="sheet_width"/>
+                    <field name="sheet_height"/>
+                    <field name="num_columns"/>
+                    <field name="num_rows"/>
+                    <field name="row_gap"/>
+                    <field name="column_gap"/>
+                    <field name="label_width"/>
+                    <field name="label_height"/>
+                    <field name="label_corner_radius"/>
+                </group>
+            </field>
+        </record>
+        
+        <record id="action_sheet_spec" model="ir.actions.act_window">
+            <field name="name">Label Sheet Specification</field>
+            <field name="res_model">labelling.sheets.spec</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem parent_id="base.menu_administration"
+                  id="menu_labelling"/>
+        <menuitem parent_id="menu_labelling"
+                  id="menu_labelling_sheet_spec_action"
+                  action_id="action_sheet_spec"/>
+    </data>
+</openerp>
