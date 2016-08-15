@@ -22,13 +22,34 @@
 
 from openerp import models, fields, api
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class LabellingSheetsPrintWizard(models.TransientModel):
     _name = 'labelling.sheets.print.wizard'
+
+    object_ids = fields.Char(
+        required=True,
+        readonly=True,
+        default=lambda self: self._default_object_ids(),
+    )
+
+    @api.model
+    def _default_object_ids(self):
+        return ','.join(map(str, self.env.context['active_ids']))
+
+    content_template_id = fields.Many2one(
+        comodel_name='labelling.content.template',
+        required=True,
+        string="Content Template",
+        help="This defines what goes on each label.",
+    )
 
     spec_id = fields.Many2one(
         comodel_name='labelling.sheets.spec',
         required=True,
         string="Sheet Specification",
+        help="This defines how the labels are laid out on the page",
     )
 
     print_borders = fields.Boolean(
@@ -38,6 +59,8 @@ class LabellingSheetsPrintWizard(models.TransientModel):
     @api.multi
     def print_pdf(self):
         self.ensure_one()
+        _logger.info("Context: {}".format(self.env.context))
         return self.env['report'].get_action(self, 'labelling_sheets.label_pdf_report')
+    
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

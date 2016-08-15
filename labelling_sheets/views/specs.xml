@@ -29,12 +29,5 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
-        
-        <menuitem parent="base.menu_administration"
-                  id="menu_labelling"
-                  name="Labelling"/>
-        <menuitem parent="menu_labelling"
-                  id="menu_labelling_sheet_spec_action"
-                  action="action_sheet_spec"/>
     </data>
 </openerp>

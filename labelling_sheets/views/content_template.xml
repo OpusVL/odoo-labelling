@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_content_template" model="ir.ui.view">
+            <field name="name">labelling.content.template.form</field>
+            <field name="type">form</field>
+            <field name="model">labelling.content.template</field>
+            <field name="arch" type="xml">
+                <sheet>
+                    <group colspan="4">
+                        <field name="name"/>
+                        <field name="model_id"/>
+                        <field name="renderer_model_id"/>
+                    </group>
+                </sheet>
+            </field>
+        </record>
+
+        <record id="action_content_template" model="ir.actions.act_window">
+            <field name="name">Label Content Template</field>
+            <field name="res_model">labelling.content.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</openerp>

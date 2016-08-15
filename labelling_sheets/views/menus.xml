@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem parent="base.menu_administration"
+                  id="menu_labelling"
+                  name="Labelling"/>
+        <menuitem parent="menu_labelling"
+                  id="menu_labelling_sheet_spec_action"
+                  action="action_sheet_spec"/>
+        <menuitem parent="menu_labelling"
+                  id="menu_labelling_content_template_action"
+                  action="action_content_template"/>
+
+    </data>
+</openerp>

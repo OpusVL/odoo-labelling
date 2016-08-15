@@ -47,33 +47,15 @@ class LabelsController(Controller):
         wizard = wizard_model.browse(cr, uid, int(wizard_id), context=context)
 
 
-        specs = wizard.spec_id.get_specification()
+        spec = wizard.spec_id.get_specification()
 
-        # Create a function to draw each label. This will be given the ReportLab drawing
-        # object to draw on, the dimensions (NB. these will be in points, the unit
-        # ReportLab uses) of the label, and the object to render.
-        def draw_label(label, width, height, obj):
-            # Just convert the object to a string and print this at the bottom left of
-            # the label.
-            label.add(shapes.String(2, 2, str(obj), fontName="Helvetica", fontSize=40))
+        template = wizard.content_template_id
 
-        # Create the sheet.
-        sheet = labels.Sheet(specs, draw_label, border=wizard.print_borders)
+        ids_str = wizard.object_ids
+        obj_ids = map(int, ids_str.split(',')) if ids_str else []
+        objects = template.get_objects(obj_ids)
+        pdf = template.get_pdf(spec, objects, border=wizard.print_borders)
 
-        # Add a couple of labels.
-        sheet.add_label("Hello")
-        sheet.add_label("World")
-
-        # We can also add each item from an iterable.
-        sheet.add_labels(range(3, 22))
-
-        # Note that any oversize label is automatically trimmed to prevent it messing up
-        # other labels.
-        sheet.add_label("Oversized label here")
-
-        pdfbuf = StringIO()
-        sheet.save(pdfbuf)
-        pdf = pdfbuf.getvalue()
         pdfhttpheaders = [
             ('Content-Type', 'application/pdf'),
             ('Content-Length', len(pdf)),

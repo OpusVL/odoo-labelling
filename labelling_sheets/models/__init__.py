@@ -23,6 +23,7 @@
 from . import (
     spec,
     pdf_print_wizard,
+    content_template,
 )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
