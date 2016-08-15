@@ -31,6 +31,10 @@ class LabellingSheetsPrintWizard(models.TransientModel):
         string="Sheet Specification",
     )
 
+    print_borders = fields.Boolean(
+        help="Prints black borders around the labels.  Useful for previewing and testing.",
+    )
+
     @api.multi
     def print_pdf(self):
         self.ensure_one()

@@ -58,7 +58,7 @@ class LabelsController(Controller):
             label.add(shapes.String(2, 2, str(obj), fontName="Helvetica", fontSize=40))
 
         # Create the sheet.
-        sheet = labels.Sheet(specs, draw_label, border=True)
+        sheet = labels.Sheet(specs, draw_label, border=wizard.print_borders)
 
         # Add a couple of labels.
         sheet.add_label("Hello")

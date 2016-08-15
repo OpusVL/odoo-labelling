@@ -8,6 +8,7 @@
                 <form>
                     <group colspan="4">
                         <field name="spec_id"/>
+                        <field name="print_borders"/>
                     </group>
                     <footer>
                         <button name="print_pdf" string="Print Labels"
