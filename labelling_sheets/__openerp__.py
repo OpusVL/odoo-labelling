@@ -38,6 +38,8 @@
         'web',
     ],
     'data': [
+        'security/groups.xml',
+        'security/ir.model.access.csv',
         'reports/labels_pdf_controller.xml',
         'views/pdf_print_wizard.xml',
         'views/specs.xml',

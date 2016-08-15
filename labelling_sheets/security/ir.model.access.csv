@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_specs_editor,Labelling Sheet Spec Editor,model_labelling_sheets_spec,group_spec_editor,1,1,1,1
+access_specs_user,Labelling Sheet Spec User,model_labelling_sheets_spec,,1,0,0,0
