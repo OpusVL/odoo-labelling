@@ -6,6 +6,7 @@
             <field name="type">form</field>
             <field name="model">labelling.sheets.spec</field>
             <field name="arch" type="xml">
+                <sheet>
                 <group colspan="4">
                     <field name="name"/>
                     <field name="sheet_width"/>
@@ -18,6 +19,7 @@
                     <field name="label_height"/>
                     <field name="label_corner_radius"/>
                 </group>
+                </sheet>
             </field>
         </record>
         
