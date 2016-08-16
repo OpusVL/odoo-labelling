@@ -121,6 +121,7 @@ class LabellingContentTemplate(models.Model):
         print_options: Dictionary containing key number_of_copies
         """
         self.ensure_one()
+        print_options = print_options or {}
 
         renderer = self.get_renderer_plugin()
 
