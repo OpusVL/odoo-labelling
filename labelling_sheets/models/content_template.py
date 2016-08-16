@@ -29,8 +29,8 @@ except ImportError:
 
 import labels
 
-class LabellingContentRenderer(models.AbstractModel):
-    _name = 'labelling.content.renderer'
+class LabellingContentRendererBasePlugin(models.AbstractModel):
+    _name = 'labelling.content.renderer.base_plugin'
 
     @api.model
     def populate_sheet(self, sheet, objects):
@@ -72,6 +72,11 @@ class LabellingContentRenderer(models.AbstractModel):
         """
         raise NotImplementedError("Override render_label")
 
+class LabellinContentRenderer(models.Model):
+    _name = 'labelling.content.renderer'
+
+    name = fields.Char(require=True, unique=True)
+    model = fields.Char(require=True, unique=True)
 
 class LabellingContentTemplate(models.Model):
     _name = 'labelling.content.template'
@@ -87,11 +92,11 @@ class LabellingContentTemplate(models.Model):
         required=True,
     )
 
-    renderer_model_id = fields.Many2one(
-        comodel_name="ir.model",
-        string="Renderer Model",
+    renderer_id = fields.Many2one(
+        comodel_name="labelling.content.renderer",
+        string="Renderer Plugin Model",
         required=True,
-        help="The model defining what should go on each label",
+        help="The name of a model implementing the plugin interface",
     )
 
     @api.multi
@@ -113,7 +118,7 @@ class LabellingContentTemplate(models.Model):
         """
         self.ensure_one()
 
-        renderer = self.get_renderer()
+        renderer = self.get_renderer_plugin()
 
         sheet = labels.Sheet(spec,
                              renderer.render_label,
@@ -125,8 +130,9 @@ class LabellingContentTemplate(models.Model):
         return pdf
 
     @api.multi
-    def get_renderer(self):
-        return self.env[self.renderer_model_id.model]
+    def get_renderer_plugin(self):
+        """Return the renderer plugin"""
+        return self.env[self.renderer_id.model]
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
