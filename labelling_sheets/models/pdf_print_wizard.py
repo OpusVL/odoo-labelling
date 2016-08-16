@@ -71,6 +71,8 @@ class LabellingSheetsPrintWizard(models.TransientModel):
     )
 
     def get_print_options(self):
+        """Return dictionary of printing options.
+        """
         return {'number_of_copies': self.number_of_copies,
                 'border': self.print_borders,}
 
