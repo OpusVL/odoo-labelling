@@ -8,5 +8,9 @@
             <field name="name">Edit Label Sheet Specifications</field>
             <field name="category_id" ref="labelling_sheets.module_category_labelling"/>
         </record>
+        <record id="group_template_editor" model="res.groups">
+            <field name="name">Edit Label Sheet Templates</field>
+            <field name="category_id" ref="labelling_sheets.module_category_labelling"/>
+        </record>
     </data>
 </openerp>
