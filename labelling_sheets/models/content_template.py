@@ -112,7 +112,7 @@ class LabellingContentTemplate(models.Model):
         return self.env[self.model_id.model].browse(ids)
 
     @api.multi
-    def get_pdf(self, spec, objects, border=False, print_options=False):
+    def get_pdf(self, spec, objects, print_options=False):
         """Return PDF data for labels of objects.
 
         spec: A labels.Specification object describing the sheets
@@ -126,7 +126,7 @@ class LabellingContentTemplate(models.Model):
 
         sheet = labels.Sheet(spec,
                              renderer.render_label,
-                             border=border)
+                             border=print_options.get('border', False))
         renderer.populate_sheet(sheet, objects,
             print_options=print_options)
         pdfbuf = StringIO()

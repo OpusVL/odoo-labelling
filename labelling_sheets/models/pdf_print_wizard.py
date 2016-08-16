@@ -63,7 +63,8 @@ class LabellingSheetsPrintWizard(models.TransientModel):
     )
 
     def get_print_options(self):
-        return {'number_of_copies': self.number_of_copies}
+        return {'number_of_copies': self.number_of_copies,
+                'border': self.print_borders,}
 
     @api.multi
     def print_pdf(self):
