@@ -54,7 +54,7 @@ class LabelsController(Controller):
         ids_str = wizard.object_ids
         obj_ids = map(int, ids_str.split(',')) if ids_str else []
         objects = template.get_objects(obj_ids)
-        pdf = template.get_pdf(spec, objects, border=wizard.print_borders)
+        pdf = template.get_pdf(spec, objects, border=wizard.print_borders, print_options=wizard.get_print_options())
 
         pdfhttpheaders = [
             ('Content-Type', 'application/pdf'),

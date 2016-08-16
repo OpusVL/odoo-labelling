@@ -33,11 +33,12 @@ class LabellingContentRendererBasePlugin(models.AbstractModel):
     _name = 'labelling.content.renderer.base_plugin'
 
     @api.model
-    def populate_sheet(self, sheet, objects):
+    def populate_sheet(self, sheet, objects, print_options=False):
         """Populate sheet with objects.
 
         sheet: A labels.Sheet object
         objects: A recordset of objects
+        print_options: A dictionary containing key 'number_of_copies'
 
         The default implementation sends each object from objects
         in turn to the sheet's drawing_callable, which will
@@ -52,7 +53,9 @@ class LabellingContentRendererBasePlugin(models.AbstractModel):
 
         e.g. sheet.add_labels(objects.mapped('lines'))
         """
-        sheet.add_labels(objects)
+        print_options = print_options or {}
+        for obj in objects:
+            sheet.add_label(obj, print_options.get('number_of_copies', 1))
 
     @api.model
     def render_label(self, label, width, height, obj):
@@ -109,12 +112,13 @@ class LabellingContentTemplate(models.Model):
         return self.env[self.model_id.model].browse(ids)
 
     @api.multi
-    def get_pdf(self, spec, objects, border=False):
+    def get_pdf(self, spec, objects, border=False, print_options=False):
         """Return PDF data for labels of objects.
 
         spec: A labels.Specification object describing the sheets
         objects: A recordset of objects to report on
         border: Whether to print borders on the sheets
+        print_options: Dictionary containing key number_of_copies
         """
         self.ensure_one()
 
@@ -123,7 +127,8 @@ class LabellingContentTemplate(models.Model):
         sheet = labels.Sheet(spec,
                              renderer.render_label,
                              border=border)
-        renderer.populate_sheet(sheet, objects)
+        renderer.populate_sheet(sheet, objects,
+            print_options=print_options)
         pdfbuf = StringIO()
         sheet.save(pdfbuf)
         pdf = pdfbuf.getvalue()

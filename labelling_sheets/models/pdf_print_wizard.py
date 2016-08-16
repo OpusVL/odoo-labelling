@@ -56,6 +56,15 @@ class LabellingSheetsPrintWizard(models.TransientModel):
         help="Prints black borders around the labels.  Useful for previewing and testing.",
     )
 
+    number_of_copies = fields.Integer(
+        default=1,
+        required=True,
+        help="Each label will be repeated this number of times in succession.",
+    )
+
+    def get_print_options(self):
+        return {'number_of_copies': self.number_of_copies}
+
     @api.multi
     def print_pdf(self):
         self.ensure_one()
