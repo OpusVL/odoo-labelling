@@ -43,7 +43,15 @@ class LabellingSheetsPrintWizard(models.TransientModel):
         required=True,
         string="Content Template",
         help="This defines what goes on each label.",
+        domain=lambda self: self._domain_template_id(),
     )
+
+    @api.model
+    def _domain_template_id(self):
+        active_model = self.env.context.get('active_model')
+        if active_model:
+            return [('model_id.model', '=', active_model)]
+        return []
 
     spec_id = fields.Many2one(
         comodel_name='labelling.sheets.spec',
