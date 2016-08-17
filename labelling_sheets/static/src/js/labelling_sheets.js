@@ -8,10 +8,10 @@ openerp.labelling_sheets = function(session) {
             var Actions = new openerp.Model('ir.actions.act_window');
             Actions.call(
                 'for_xml_id',
-                ['ubt_lunch', 'action_sheets_print_wizard']
+                ['labelling_sheets', 'action_sheets_print_wizard']
             ).done(function (action) {
                 self.add_items('other', [{
-                    label: _t('Print Labels'),
+                    label: _t('Print Sheet Labels'),
                     'action': action,
                 }]);
             });

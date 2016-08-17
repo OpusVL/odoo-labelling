@@ -21,5 +21,17 @@
                 </form>
             </field>
         </record>
+
+        <record id="action_sheets_print_wizard" model="ir.actions.act_window">
+            <field name="name">Print Sheet Labels</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">labelling.sheets.print.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="labelling_sheets.view_sheets_print_wizard"/>
+            <field name="key2">client_action_multi</field>
+    </record>
+
     </data>
 </openerp>
