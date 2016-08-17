@@ -1,8 +1,28 @@
-# Work in progress: Not ready for production use.
 # Print on Labelling Sheets
 ## Purpose
+
+Provides an action 'More -> Print Sheet Labels' which will allow you to print
+labels for one or more objects from the Odoo GUI.
+
+This uses the pyLabels module to lay your labels out on a page.
+
+All you need to do is provide code to draw on each label.
+
+The layout of the label sheets is configurable in the database.
+
+The system is designed to be extensible with renderers, so you can
+draw on your labels anything supported by reportlab (assuming it will
+physically fit on one of the labels) by writing code in an
+Odoo addon.
+
 ## Limitations
-This is not yet ready for production use.
+
+* There is not currently a renderer that takes options from the database,
+so you need to hard-code your per-label printing logic in a model.
+However, with a little extra development work it should be possible to write
+a plugin that takes parameters from your template object, defining what to render
+and which fonts you wish to use.
+
 
 # Copyright and License
 
