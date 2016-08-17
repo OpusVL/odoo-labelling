@@ -45,6 +45,7 @@
         'views/specs.xml',
         'views/content_template.xml',
         'views/menus.xml',
+        'views/more-menu.xml',
         'data/sheet_specs.xml',
     ],
     'demo': [

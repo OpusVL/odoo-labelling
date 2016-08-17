@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="share assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript"
+                        src="/labelling_sheets/static/src/js/labelling_sheets.js">
+                </script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
