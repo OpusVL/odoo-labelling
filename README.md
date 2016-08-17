@@ -19,9 +19,9 @@ Odoo addon.
 
 * There is not currently a renderer that takes options from the database,
 so you need to hard-code your per-label printing logic in a model.
-However, with a little extra development work it should be possible to write
-a plugin that takes parameters from your template object, defining what to render
-and which fonts you wish to use.
+However, with some extra development work it should be possible to write
+a plugin that takes parameters from your template object, defining which fields
+to render and which fonts you wish to use.
 
 
 # Copyright and License
