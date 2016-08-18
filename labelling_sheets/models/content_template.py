@@ -27,13 +27,31 @@ try:
 except ImportError:
     from StringIO import StringIO
 
+import yaml
 import labels
 
 class LabellingContentRendererBasePlugin(models.AbstractModel):
     _name = 'labelling.content.renderer.base_plugin'
 
     @api.model
-    def populate_sheet(self, sheet, objects, print_options=False):
+    def get_template_config(self, template):
+        """Returns parsed data structure from renderer_config.
+
+        Assumes that renderer_config is in JSON or YAML format.
+
+        Returns False if the config is falsey.
+
+        Override this if you wish to use a different config format.
+
+        template: A labelling.content.template object.
+        """
+        conf = template.renderer_config
+        if not conf:
+            return conf
+        return yaml.safe_load(conf)
+
+    @api.model
+    def populate_sheet(self, sheet, objects, template_config, print_options=False):
         """Populate sheet with objects.
 
         sheet: A labels.Sheet object
@@ -58,7 +76,7 @@ class LabellingContentRendererBasePlugin(models.AbstractModel):
             sheet.add_label(obj, print_options.get('number_of_copies', 1))
 
     @api.model
-    def render_label(self, label, width, height, obj):
+    def render_label(self, label, width, height, obj, template_config):
         """ABSTRACT: Renders obj onto the label.
 
         You should override this method.
@@ -71,7 +89,7 @@ class LabellingContentRendererBasePlugin(models.AbstractModel):
         width: The width (in points) you have available
         height: The height (in points) you have available
         obj: The object's browse record you're working with.
-
+        template_config: The parsed config from the template.
         """
         raise NotImplementedError("Override render_label")
 
@@ -80,6 +98,8 @@ class LabellinContentRenderer(models.Model):
 
     name = fields.Char(require=True, unique=True)
     model = fields.Char(require=True, unique=True)
+    help_html = fields.Html(
+        help="Documentation for the renderer")
 
 class LabellingContentTemplate(models.Model):
     _name = 'labelling.content.template'
@@ -100,6 +120,15 @@ class LabellingContentTemplate(models.Model):
         string="Renderer Plugin Model",
         required=True,
         help="The name of a model implementing the plugin interface",
+    )
+
+    renderer_config = fields.Text(
+        help="Configuration to pass to the chosen renderer",
+    )
+
+    renderer_help = fields.Html(
+        related=['renderer_id', 'help_html'],
+        readonly=True,
     )
 
     @api.multi
@@ -125,10 +154,15 @@ class LabellingContentTemplate(models.Model):
 
         renderer = self.get_renderer_plugin()
 
+        config = renderer.get_template_config(self)
+
+        def renderer_closure(label, width, height, obj):
+            return renderer.render_label(label, width, height, obj, config)
+        
         sheet = labels.Sheet(spec,
-                             renderer.render_label,
+                             renderer_closure,
                              border=print_options.get('border', False))
-        renderer.populate_sheet(sheet, objects,
+        renderer.populate_sheet(sheet, objects, config,
             print_options=print_options)
         pdfbuf = StringIO()
         sheet.save(pdfbuf)

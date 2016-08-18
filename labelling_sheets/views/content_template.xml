@@ -11,7 +11,12 @@
                         <field name="name"/>
                         <field name="model_id"/>
                         <field name="renderer_id"/>
+                        <field name="renderer_config"/>
                     </group>
+                    <div attrs="{'invisible': [('renderer_help', '=', False)]}">
+                        <h2>Renderer Help</h2>
+                        <field name="renderer_help"/>
+                    </div>
                 </sheet>
             </field>
         </record>
