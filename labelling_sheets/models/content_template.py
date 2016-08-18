@@ -102,6 +102,10 @@ class LabellingContentTemplate(models.Model):
         help="The name of a model implementing the plugin interface",
     )
 
+    renderer_config = fields.Text(
+        help="Configuration to pass to the chosen renderer",
+    )
+
     @api.multi
     def get_objects(self, ids):
         """Return the objects to be reported on given integer ids.
