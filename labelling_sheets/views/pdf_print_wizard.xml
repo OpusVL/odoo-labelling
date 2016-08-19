@@ -8,7 +8,7 @@
                 <form>
                     <group colspan="4">
                         <field name="object_ids" invisible="1"/>
-                        <field name="content_template_id"/>
+                        <field name="content_template_id" required="1"/>
                         <field name="spec_id"/>
                         <field name="number_of_copies"/>
                         <field name="print_borders"/>

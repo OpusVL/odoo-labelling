@@ -40,8 +40,9 @@ class LabellingSheetsPrintWizard(models.TransientModel):
 
     content_template_id = fields.Many2one(
         comodel_name='labelling.content.template',
-        required=True,
         string="Content Template",
+        required=True,
+        ondelete='cascade',
         help="This defines what goes on each label.",
         domain=lambda self: self._domain_template_id(),
     )
