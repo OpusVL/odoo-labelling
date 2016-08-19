@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="renderer" model="labelling.content.renderer">
+            <field name="name">Simple Lines</field>
+            <field name="model">labelling.content.renderer.plugin.simple_lines</field>
+            <field name="help_html" type="xml">
+                <h3>Description of Simple Lines renderer</h3>
+                <ul>
+                    <li>This renderer puts one field on each line.</li>
+                    <li>
+                        If the text is too wide for the label then the font size is
+                        reduced until it fits.
+                    </li>
+                </ul>
+
+                <h3>Configuration</h3>
+                <p>
+                    You should put in Renderer Config field a single JSON or YAML
+                    object that looks something like this:
+                </p>
+                <pre>
+                    {"lines": ["o.field1", "o.field2.name", ...],
+                     "mapping": "order_line"}
+                </pre>
+
+                <h4>lines (required)</h4>
+                <p>
+                    The object must have the key "lines" whose value is a
+                    an array of Python expressions.<br/>
+
+                    The variable "o" in those expressions represents the
+                    Odoo record that is to be rendered on the current label.
+                </p>
+
+                <p>
+                    Note if the field is a numeric one, use this:
+                </p>
+
+                <pre>
+                    "'{}'.format(o.price_unit)"
+                </pre>
+
+                <h4>mapping (optional)</h4>
+                <p>
+                    The object may also have an optional field "mapping"
+                    whose value is the name of a field on your object.
+                    If you provide this, then instead of getting labels
+                    on the selected records, you will get labels on
+                    all children of the selected records following these
+                    fields.
+                </p>
+                <p>
+                    So say your template is bound to the 'sale.order' object.
+
+                    If "mapping" is set to "order_line", then if you select
+                    one or more sale orders and print the labels for it then
+                    o will be bound, in turn, to each of the members of the
+                    One2many field order_line on each of the selected sale orders.
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>
