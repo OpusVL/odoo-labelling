@@ -51,6 +51,20 @@ class LabellingContentRendererBasePlugin(models.AbstractModel):
         return yaml.safe_load(conf)
 
     @api.model
+    def objects_for_labels(self, objects, template_config, print_options):
+        """Override this to alter the iteration of objects sent to the labels.
+
+        For example you might want to get child objects from a One2many,
+        change the sort order, etc.
+
+        Return an iterable over the new objects.
+
+        This implementation simply returns objects unchanged.
+        """
+        return objects
+        
+
+    @api.model
     def populate_sheet(self, sheet, objects, template_config, print_options=False):
         """Populate sheet with objects.
 
@@ -72,8 +86,9 @@ class LabellingContentRendererBasePlugin(models.AbstractModel):
         e.g. sheet.add_labels(objects.mapped('lines'))
         """
         print_options = print_options or {}
-        for obj in objects:
-            sheet.add_label(obj, print_options.get('number_of_copies', 1))
+        copies = print_options.get('number_of_copies', 1)
+        for obj in self.objects_for_labels(objects, template_config, print_options):
+            sheet.add_label(obj, copies)
 
     @api.model
     def render_label(self, label, width, height, obj, template_config):
