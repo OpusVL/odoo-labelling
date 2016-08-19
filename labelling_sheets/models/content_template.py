@@ -93,7 +93,7 @@ class LabellingContentRendererBasePlugin(models.AbstractModel):
         """
         raise NotImplementedError("Override render_label")
 
-class LabellinContentRenderer(models.Model):
+class LabellingContentRenderer(models.Model):
     _name = 'labelling.content.renderer'
 
     name = fields.Char(require=True, unique=True)
