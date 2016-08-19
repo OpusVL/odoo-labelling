@@ -58,6 +58,22 @@
                     o will be bound, in turn, to each of the members of the
                     One2many field order_line on each of the selected sale orders.
                 </p>
+
+                <h4>font_size (optional, default=12)</h4>
+                <p>
+                    Specify the font size in points. Integer.  Defaults to 12.
+                </p>
+                <h4>line_gap (optional, default=6)</h4>
+                <p>
+                    Specify the gap to put between lines in points.
+                    Integer.  Defaults to 6.
+                </p>
+                <h4>font_name (optional, default="Helvetica")</h4>
+                <p>
+                    The name of the font to use.  String. Defaults to "Helvetica".
+                    Note that this is restricted
+                    to the fonts that are made available by ReportLab.
+                </p>
             </field>
         </record>
     </data>
