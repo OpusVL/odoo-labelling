@@ -21,7 +21,7 @@
                 </p>
                 <pre>
                     {"lines": ["o.field1", "o.field2.name", ...],
-                     "mapping": "order_line"}
+                     "mapped": "order_line"}
                 </pre>
 
                 <h4>lines (required)</h4>
@@ -41,9 +41,9 @@
                     "'{}'.format(o.price_unit)"
                 </pre>
 
-                <h4>mapping (optional)</h4>
+                <h4>mapped (optional)</h4>
                 <p>
-                    The object may also have an optional field "mapping"
+                    The object may also have an optional field "mapped"
                     whose value is the name of a field on your object.
                     If you provide this, then instead of getting labels
                     on the selected records, you will get labels on
@@ -53,7 +53,7 @@
                 <p>
                     So say your template is bound to the 'sale.order' object.
 
-                    If "mapping" is set to "order_line", then if you select
+                    If "mapped" is set to "order_line", then if you select
                     one or more sale orders and print the labels for it then
                     o will be bound, in turn, to each of the members of the
                     One2many field order_line on each of the selected sale orders.
