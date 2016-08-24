@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
         <record id="sheet_spec_avery_A4_J8360" model="labelling.sheets.spec">
             <field name="name">Avery A4 J8360 Address</field>
             <field name="sheet_width">210</field>
