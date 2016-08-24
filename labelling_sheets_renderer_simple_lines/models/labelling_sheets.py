@@ -44,7 +44,7 @@ class LabellingContentRendererPluginSimpleLines(models.AbstractModel):
     @api.model
     def render_label(self, label, width, height, line, template_config):
         tconf = template_config or {}
-        lw = LineWriter(label, 2, width, height,
+        lw = LineWriter(label, 0, width, height,
                         font_name=tconf.get('font_name', 'Helvetica'),
                         base_font_size=tconf.get('font_size', 12),
                         pad_extra=tconf.get('line_gap', 6))
