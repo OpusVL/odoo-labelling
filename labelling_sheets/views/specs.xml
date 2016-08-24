@@ -18,6 +18,10 @@
                     <field name="label_width"/>
                     <field name="label_height"/>
                     <field name="label_corner_radius"/>
+                    <field name="label_left_padding"/>
+                    <field name="label_right_padding"/>
+                    <field name="label_top_padding"/>
+                    <field name="label_bottom_padding"/>
                 </group>
                 </sheet>
             </field>

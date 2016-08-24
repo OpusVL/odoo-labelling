@@ -33,6 +33,10 @@ class LabellingSheetsPaperSpec(models.Model):
     label_width = fields.Float(required=True)
     label_height = fields.Float(required=True)
     label_corner_radius = fields.Float(required=True)
+    label_left_padding = fields.Float(required=True, default=0)
+    label_right_padding = fields.Float(required=True, default=0)
+    label_top_padding = fields.Float(required=True, default=0)
+    label_bottom_padding = fields.Float(required=True, default=0)
     column_gap = fields.Float(required=True)
     row_gap = fields.Float(required=True)
     num_columns = fields.Integer(required=True)
@@ -52,6 +56,10 @@ class LabellingSheetsPaperSpec(models.Model):
             corner_radius=self.label_corner_radius,
             column_gap=self.column_gap,
             row_gap=self.row_gap,
+            left_padding=self.label_left_padding,
+            right_padding=self.label_right_padding,
+            top_padding=self.label_top_padding,
+            bottom_padding=self.label_bottom_padding,
         )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

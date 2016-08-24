@@ -53,10 +53,11 @@ class LineWriter(object):
         points further down the label.
         """
         font_size = squeeze_in(text, self.width, self.font_name, self.base_font_size)
-        self.y -= (self.base_font_size + self.pad_extra)
+        self.y -= self.base_font_size
         self.label.add(
             shapes.String(self.x, self.y, text,
                           fontName=self.font_name, fontSize=font_size))
+        self.y -= self.pad_extra
     
 def squeeze_in(astr, width, font_name, base_font_size):
     """Return font size needed to squeeze astr into width.
