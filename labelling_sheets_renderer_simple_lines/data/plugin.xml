@@ -59,6 +59,29 @@
                     One2many field order_line on each of the selected sale orders.
                 </p>
 
+                <h4>sorted (optional)</h4>
+
+                <p>
+                    If you provide the 'sorted' key, you must provide an array of pairs, thus:
+                </p>
+                <pre>
+                    {"sorted": [["o.field2.name", "asc"], ["o.date", "desc"]],
+                    }
+                </pre>
+
+                <p>
+                    The variable "o" in those expressions represents the
+                    Odoo record that is to be rendered on the current label.
+
+                    Each pair contains a Python expression (into which the line is passed as 'o'
+                    during the sort), and a direction which must be either "asc" or "desc" for ascending
+                    or descending respectively.
+
+                    The set of line objects will be sorted in the order.  In the above example every label
+                    with the same value of o.field2.name will come out together in order, then within those
+                    groups they will be sorted by o.date.
+                </p>
+
                 <h4>font_size (optional, default=12)</h4>
                 <p>
                     Specify the font size in points. Integer.  Defaults to 12.
