@@ -39,7 +39,7 @@ class LabellingContentRendererPluginSimpleLines(models.AbstractModel):
         mapspec = template_config.get('mapped')
         if mapspec:
             return objects.mapped(mapspec)
-        return mapped
+        return objects
             
     @api.model
     def render_label(self, label, width, height, line, template_config):
