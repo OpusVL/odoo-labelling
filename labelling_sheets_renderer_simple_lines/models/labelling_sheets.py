@@ -36,11 +36,26 @@ class LabellingContentRendererPluginSimpleLines(models.AbstractModel):
         """Return objects mapped with 'mapped' field if provided in template_config.
         """
         template_config = template_config or {}
+        out_objects = objects
         mapspec = template_config.get('mapped')
         if mapspec:
-            return objects.mapped(mapspec)
-        return objects
-            
+            out_objects = out_objects.mapped(mapspec)
+
+        sortspec = template_config.get('sorted')
+        if sortspec:
+            # This relies on .sorted() being a stable sort algorithm
+            # It has the benefit that non-integers can be sorted descending or ascending, independently of any other items
+            # The reversed() below was added because I found the sorts came out in the opposite order to those listed,
+            # if you take it to be like SQL ORDER BY foo ASC, bar DESC.
+            for (fieldspec, direction) in reversed(sortspec):
+                out_objects = out_objects.sorted(
+                    key=( lambda line: safe_eval(fieldspec, {'o': line}, {})),
+                    reverse=( direction.lower().startswith('desc') ),
+                )
+
+        return out_objects
+
+
     @api.model
     def render_label(self, label, width, height, line, template_config):
         tconf = template_config or {}
