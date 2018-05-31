@@ -58,7 +58,7 @@ class LabellingContentRendererPluginSimpleLines(models.AbstractModel):
         if dupspec:
             modelname = out_objects[0]._name
             single_objects = out_objects
-            out_objects = self.env[modelname]   # the empty set
+            out_objects = self.env[modelname]   # the empty sequence
             for line in single_objects:
                 num_occurrences = safe_eval(dupspec, {'o': line}, {})
                 for _ in range(num_occurrences):
