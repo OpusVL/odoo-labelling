@@ -53,6 +53,17 @@ class LabellingContentRendererPluginSimpleLines(models.AbstractModel):
                     reverse=( direction.lower().startswith('desc') ),
                 )
 
+        # Print multiple copies of an object based on data in the object
+        dupspec = template_config.get('copies')
+        if dupspec:
+            modelname = out_objects[0]._name
+            single_objects = out_objects
+            out_objects = self.env[modelname]   # the empty set
+            for line in single_objects:
+                num_occurrences = safe_eval(dupspec, {'o': line}, {})
+                for _ in range(num_occurrences):
+                    out_objects += line
+
         return out_objects
 
 

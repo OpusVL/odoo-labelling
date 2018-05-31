@@ -82,6 +82,23 @@
                     groups they will be sorted by o.date.
                 </p>
 
+                <h4>copies (optional)</h4>
+                <p>
+                    If you provide the 'copies' key, you must provide a Python expression enclosed in a string, e.g. for a sale order line you might use:
+                </p>
+                <pre>
+                    {"copies": "int(o.product_uom_qty)"}
+                </pre>
+                <p>
+                    This will specify the number of copies of each label that should be printed.<br/>
+                    The variable "o" in those expressions is one Odoo record after the rules for "mapped" and "sorted"
+                    have been applied.<br/>
+                    Your expression MUST always return an integer.<br/>
+                    In the above example, if o.product_uom_qty is 4 for a given record, then 4 copies will be printed.<br/>
+                    Note this is applied before the number of copies requested in the print dialog, so if the user asks
+                    for two copies of each label in there, then each label will be printed (2 &#215; 4 = 8) times.
+                </p>
+
                 <h4>font_size (optional, default=12)</h4>
                 <p>
                     Specify the font size in points. Integer.  Defaults to 12.
