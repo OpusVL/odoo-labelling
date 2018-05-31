@@ -90,7 +90,7 @@
                     If you provide the 'copies' key, you must provide a Python expression enclosed in a string, e.g. for a sale order line you might use:
                 </p>
                 <pre>
-                    {"copies": "int(o.product_uom_qty)"}
+                    {"copies": "int(o.product_uom_qty or 0)"}
                 </pre>
                 <p>
                     This will specify the number of copies of each label that should be printed.<br/>
