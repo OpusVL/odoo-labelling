@@ -53,6 +53,17 @@ class LabellingContentRendererPluginSimpleLines(models.AbstractModel):
                     reverse=( direction.lower().startswith('desc') ),
                 )
 
+        # Print multiple copies of an object based on data in the object
+        dupspec = template_config.get('copies')
+        if dupspec:
+            modelname = out_objects[0]._name
+            single_objects = out_objects
+            out_objects = self.env[modelname]   # the empty set
+            for line in single_objects:
+                num_occurrences = safe_eval(dupspec, {'o': line}, {})
+                for _ in range(num_occurrences):
+                    out_objects += line
+
         return out_objects
 
 
@@ -64,7 +75,7 @@ class LabellingContentRendererPluginSimpleLines(models.AbstractModel):
                         base_font_size=tconf.get('font_size', 12),
                         pad_extra=tconf.get('line_gap', 6))
         for expr in template_config['lines']:
-            lw.write_line(safe_eval(expr, {'o': line}, {}))
+            lw.write_line(safe_eval(expr, {'o': line}, {}) or '')
     
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
