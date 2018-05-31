@@ -30,7 +30,10 @@
                     an array of Python expressions.<br/>
 
                     The variable "o" in those expressions represents the
-                    Odoo record that is to be rendered on the current label.
+                    Odoo record that is to be rendered on the current label.<br/>
+
+                    Each line expression must always return a string, or False.  If the return value booleanises as False,
+                    then the empty string will be returned.  So make sure you stringify any integers for example with "%d"%o.foo.
                 </p>
 
                 <p>

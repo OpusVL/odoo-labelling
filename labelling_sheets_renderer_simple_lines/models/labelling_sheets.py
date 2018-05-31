@@ -75,7 +75,7 @@ class LabellingContentRendererPluginSimpleLines(models.AbstractModel):
                         base_font_size=tconf.get('font_size', 12),
                         pad_extra=tconf.get('line_gap', 6))
         for expr in template_config['lines']:
-            lw.write_line(safe_eval(expr, {'o': line}, {}))
+            lw.write_line(safe_eval(expr, {'o': line}, {}) or '')
     
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
